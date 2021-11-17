@@ -80,7 +80,7 @@
             </ul>
           </li>
           <li class="nav-item">
-            <a href="#" class="nav-link">
+            <a href="akun.php" class="nav-link">
               <i class="nav-icon fas fa-user-alt"></i>
               <p>Akun</p>
             </a>
@@ -108,6 +108,7 @@
           <div class="col-sm-6">
             <h1 class="m-0">Dashboard</h1>
           </div><!-- /.col -->
+          
         </div><!-- /.row -->
       </div><!-- /.container-fluid -->
     </div>
@@ -223,15 +224,15 @@
 
                             
                                 include './koneksi.php';
-                                $employee = mysqli_query($conn,"select * from admin");
+                                $employee = mysqli_query($conn,"select * from produk");
                                 while($row = mysqli_fetch_array($employee))
                                 {
                                     echo "<tr>
-                                     <td>".$row['id_admin']."</td>
-                                     <td>".$row['id_admin']."</td>
-                                     <td>".$row['id_admin']."</td>
-                                    <td> <img src='images/".$row['gambar_buku']."' class='card-img-top' style='width: 80px;'></td>
-                                    <td> <a href='ubah_data.php?id_buku= $row[id_buku]' class='btn btn-warning btn-sm'>Ubah</a>&nbsp&nbsp&nbsp<a href='hapus.php?id_buku=$row[id_buku]' class='btn btn-warning btn-sm'>Hapus</a></td>
+                                     <td>".$row['nama_produk']."</td>
+                                     <td>".$row['harga_produk']."</td>
+                                     <td>".$row['stok']."</td>
+                                    <td> <img src='images/".$row['gambar_produk']."' class='card-img-top' style='width: 80px;'></td>
+                                    <td> <a href='ubah_data.php?id_produk= $row[id_produk]' class='btn btn-warning btn-sm'>Ubah</a>&nbsp&nbsp&nbsp<a href='hapus.php?id_produk=$row[id_produk]' class='btn btn-warning btn-sm'>Hapus</a></td>
 
                                 </tr>";
                                 }
@@ -246,7 +247,50 @@
                             </script>
 
                         </table>
-        </div>
+                        <!-- Button trigger modal -->
+                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                          Tambah Produk
+                        </button>
+
+                        <!-- Modal -->
+                        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                          <div class="modal-dialog">
+                            <div class="modal-content">
+                              <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Tambah Produk</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                              </div>
+                              <div class="modal-body">
+                              <section class="content">
+                                  <div class="container-fluid">
+                                    <div class="row">
+                                      <form action="simpan_produk.php" method="POST" enctype="multipart/form-data">               
+                                              <div class="mb-3">
+                                                  <label class="form-label">Nama Produk</label>
+                                                  <input type="text" name="nama_produk" class="form-control">
+                                              </div>
+                                              <div class="mb-3">
+                                                  <label class="form-label">Harga Produk</label>
+                                                  <input type="text" name="harga_produk" class="form-control"></label>
+                                              </div>
+                                              <div class="mb-3">
+                                                  <label class="form-label">Stok</label>
+                                                  <input type="text" name="stok" class="form-control"></label>
+                                              </div>  
+                                              <div class="mb-3">
+                                                  <label class="form-label">Gambar Produk</label>
+                                                  <input type="file" name="gambar_produk" value="" class="form-control"></label>
+                                              </div>
+                                              <button type="submit" name="simpan" value="simpan" class="btn btn-warning">Simpan</button>
+                                      </form>
+                                    </div>
+                                  </div>                                
+                                </section>
+                              </div>
+                             
+                            </div>
+                          </div>
+                        </div>
         <!-- /.row -->
         <!-- Main row -->
         <!-- /.row (main row) -->
@@ -299,5 +343,7 @@
 <script src="dist/js/demo.js"></script>
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
 <script src="dist/js/pages/dashboard.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
 </body>
 </html>
