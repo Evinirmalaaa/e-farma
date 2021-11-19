@@ -38,12 +38,6 @@ if($cek > 0){
 		header("location:user.php");
 
 	// cek jika user login sebagai pengurus
-	}else if($data['level']=="pengurus"){
-		// buat session login dan username
-		$_SESSION['username'] = $username;
-		$_SESSION['level'] = "pengurus";
-		// alihkan ke halaman dashboard pengurus
-		header("location:halaman_pengurus.php");
 
 	}else{
 

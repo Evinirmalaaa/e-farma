@@ -13,22 +13,17 @@
 <?php
     include './koneksi.php';
 
-    if(isset($_POST['simpan'])){
-         $nama_produk = $_POST['nama_produk'];
-        $harga_produk = $_POST['harga_produk'];
-        $stok = $_POST['stok'];
-        $image = $_FILES['gambar_produk']['name'];
-        $target = "images/".basename($image);
+    $nama = $_POST['nama'];
+    $username = $_POST['username'];
+    $password = $_POST['password'];
+    
 
-
-        $sql = "INSERT INTO produk (nama_produk, harga_produk, stok, gambar_produk) VALUES('$nama_produk','$harga_produk','$stok','$image')";
-        if($conn->query($sql) === TRUE){
-            header("location:admin.php?pesan=sukses_produk");
-        }else{
-            echo "Error: " . $sql . "<br>" . $conn->error;
-        }
+    $sql = "INSERT INTO user (nama, username, password, level) VALUES('$nama','$username','$password','admin')";
+    if($conn->query($sql) === TRUE){
+       header("location:register.php?pesan=sukses");
+    }else{
+        echo "Error: " . $sql . "<br>" . $conn->error;
     }
-   
 
     $conn->close();
 

@@ -69,18 +69,14 @@
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
+          <li class="nav-item">
+            <a href="user.php" class="nav-link">
+              <i class="nav-icon fas fa-th-large"></i>
+              <p>Dasboard</p>
+            </a>
+          </li> 
           <li class="nav-item menu-open">
             <a href="#" class="nav-link active">
-              <i class="nav-icon fas fa-th-large"></i>
-              <p>
-                Dashboard
-              </p>
-            </a>
-            <ul class="nav nav-treeview">
-            </ul>
-          </li>
-          <li class="nav-item">
-            <a href="akun.php" class="nav-link">
               <i class="nav-icon fas fa-user-alt"></i>
               <p>Akun</p>
             </a>
@@ -106,9 +102,8 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 class="m-0">Dashboard</h1>
+            <h1 class="m-0">Daftar Akun</h1>
           </div><!-- /.col -->
-          
         </div><!-- /.row -->
       </div><!-- /.container-fluid -->
     </div>
@@ -117,134 +112,37 @@
     <!-- Main content -->
     <section class="content">
       <div class="container-fluid">
-        <!-- Small boxes (Stat box) -->
-        <div class="row">
-          <div class="col-lg-4 col-6">
-            <!-- small box -->
-             <?php
-                            
-
-                            
-                                include './koneksi.php';
-                                $employee = mysqli_query($conn,"select * from admin");
-                                while($row = mysqli_fetch_array($employee))
-                                {
-                                    echo "
-                            <div class='small-box bg-white'>
-                                <div class='inner'>
-                                  <h3>".$row['total_orderan']."</h3>
-
-                                  <h5>Total Orderan</h5>
-                                </div>
-                                <div class='icon'>
-                                    <i class='fas fa-shopping-cart'></i>
-                                </div>
-                            </div>
-                  
-                              ";
-                                }
-                            ?>
-            
-          </div>
-          <!-- ./col -->
-          <div class="col-lg-4 col-6">
-            <!-- small box -->
-               <?php
-                            
-
-                            
-                                include './koneksi.php';
-                                $employee = mysqli_query($conn,"select * from admin");
-                                while($row = mysqli_fetch_array($employee))
-                                {
-                                    echo "
-
-                                    <div class='small-box bg-white'>
-            
-                                      <div class='inner'>
-                                        <h3>".$row['total_pengguna']."</h3>
-
-                                        <h5>Total Pengguna</h5>
-                                      </div>
-                                      <div class='icon'>
-                                        <i class='fas fa-user'></i>
-                                      </div>
-                                    </div>
-
-                              ";
-                                }
-                            ?>
-           
-          </div>
-          <!-- ./col -->
-          <div class="col-lg-4 col-8">
-            <!-- small box -->
-             <?php
-                            
-
-                            
-                                include './koneksi.php';
-                                $employee = mysqli_query($conn,"select * from admin");
-                                while($row = mysqli_fetch_array($employee))
-                                {
-                                    echo "
-
-                                <div class='small-box bg-white'>
-                                  <div class='inner'>
-                                    <h3>".$row['total_produk']."</h3>
-
-                                    <h5>Total Produk</h5>
-                                  </div>
-                                  <div class='icon'>
-                                    <i class='fas fa-shopping-bag'></i>
-                                  </div>
-                                </div>
-
-                              ";
-                                }
-              ?>
-            
-          </div>
-          <?php 
+        <?php 
+	if(isset($_GET['pesan'])){
+		if($_GET['pesan']=="sukses_hapus"){
+			echo "<div class='alert alert-success alert-dismissible fade show' role='alert'>
+  <strong>Hapus Akun Sukses !</strong>
+  <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button>
+</div>";
+		}
+	}
+	?>
+  <?php 
 	if(isset($_GET['pesan'])){
 		if($_GET['pesan']=="sukses"){
 			echo "<div class='alert alert-success alert-dismissible fade show' role='alert'>
-  <strong>Hapus Data Sukses !</strong>
+  <strong>Buat Akun Sukses !</strong>
   <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button>
-</div>";
+</div></div>";
 		}
 	}
 	?>
-      <?php 
-	if(isset($_GET['pesan'])){
-		if($_GET['pesan']=="sukses_produk"){
-			echo "<div class='alert alert-success alert-dismissible fade show' role='alert'>
-  <strong>Tambah Data Sukses !</strong>
-  <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button>
-</div>";
-		}
-	}
-	?>
-   <?php 
-	if(isset($_GET['pesan'])){
-		if($_GET['pesan']=="ubahproduk_sukses"){
-			echo "<div class='alert alert-success alert-dismissible fade show' role='alert'>
-  <strong>Ubah Produk Sukses !</strong>
-  <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button>
-</div>";
-		}
-	}
-	?>
+        <!-- Small boxes (Stat box) -->
           <!-- ./col -->
           <!-- ./col -->
                         <table class="table table-bordered mt-4">
                             <thead class="bg-blue">
                                 <tr>
-                                    <th>Id Produk</th>
-                                    <th>Nama Produk</th>
-                                    <th>Harga Produk</th>
-                                    <th>Stok</th>
-                                    <th>Gambar Produk</th>
+                                    <th>Id User</th>
+                                    <th>Nama</th>
+                                    <th>Username</th>
+                                    <th>Password</th>
+                                    <th>Level</th>
                                     <th>Aksi</th>
                                 </tr>
                             </thead>
@@ -255,16 +153,16 @@
 
                             
                                 include './koneksi.php';
-                                $employee = mysqli_query($conn,"select * from produk");
+                                $employee = mysqli_query($conn,"select * from user");
                                 while($row = mysqli_fetch_array($employee))
                                 {
                                     echo "<tr>
-                                     <td>".$row['id_produk']."</td>
-                                     <td>".$row['nama_produk']."</td>
-                                     <td>".$row['harga_produk']."</td>
-                                     <td>".$row['stok']."</td>
-                                    <td> <img src='images/".$row['gambar_produk']."' class='card-img-top' style='width: 80px;'></td>
-                                    <td> <a href='ubah_produk.php?id_produk= $row[id_produk]' class='btn btn-warning btn-sm'>Ubah</a>&nbsp&nbsp&nbsp<a href='hapus_produk.php?id_produk=$row[id_produk]' class='btn btn-warning btn-sm'>Hapus</a></td>
+                                     <td>".$row['id']."</td>
+                                     <td>".$row['nama']."</td>
+                                     <td>".$row['username']."</td>
+                                    <td>".$row['password']."</td>
+                                    <td>".$row['level']."</td>
+                                    <td> <a href='ubah_data.php?id= $row[id]' class='btn btn-warning btn-sm'>Ubah</a>&nbsp&nbsp&nbsp<a href='hapus.php?id=$row[id]' class='btn btn-warning btn-sm'>Hapus</a></td>
 
                                 </tr>";
                                 }
@@ -279,40 +177,42 @@
                             </script>
 
                         </table>
-                        <!-- Button trigger modal -->
                         <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                          Tambah Produk
+                          Tambah Akun
                         </button>
 
-                        <!-- Modal -->
                         <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                           <div class="modal-dialog">
                             <div class="modal-content">
                               <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLabel">Tambah Produk</h5>
+                                <h5 class="modal-title" id="exampleModalLabel">Tambah Akun</h5>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                               </div>
                               <div class="modal-body">
                                 <section class="content">
                                   <div class="container-fluid">
                                     <div class="row">
-                                      <form action="simpan_produk.php" method="POST" enctype="multipart/form-data">               
+                                      <form action="simpan_akun.php" method="POST" enctype="multipart/form-data">               
                                               <div class="mb-3">
-                                                  <label class="form-label">Nama Produk</label>
-                                                  <input type="text" name="nama_produk" class="form-control">
+                                                  <label class="form-label">Nama</label>
+                                                  <input type="text" name="nama" class="form-control">
                                               </div>
                                               <div class="mb-3">
-                                                  <label class="form-label">Harga Produk</label>
-                                                  <input type="text" name="harga_produk" class="form-control"></label>
+                                                  <label class="form-label">Username</label>
+                                                  <input type="text" name="username" class="form-control"></label>
                                               </div>
                                               <div class="mb-3">
-                                                  <label class="form-label">Stok</label>
-                                                  <input type="text" name="stok" class="form-control"></label>
-                                              </div>  
-                                              <div class="mb-3">
-                                                  <label class="form-label">Gambar Produk</label>
-                                                  <input type="file" name="gambar_produk" value="" class="form-control"></label>
+                                                  <label class="form-label">Password</label>
+                                                  <input type="text" name="password" class="form-control"></label>
                                               </div>
+                                                <div class="mb-3">
+                                                  <label class="form-label">Level</label>
+                                                  <select class="form-select" aria-label="Default select example" name="level">
+                                                    <option selected>Plih Level</option>
+                                                    <option value="admin" name="level">Admin</option>
+                                                    <option value="user" name="level">User</option>
+                                                  </select>
+                                              </div>    
                                               <button type="submit" name="simpan" value="simpan" class="btn btn-warning">Simpan</button>
                                       </form>
                                     </div>
@@ -322,13 +222,12 @@
                             </div>
                           </div>
                         </div>
-                        
+        </div>
         <!-- /.row -->
         <!-- Main row -->
         <!-- /.row (main row) -->
       </div><!-- /.container-fluid -->
     </section>
-    
     <!-- /.content -->
     
   </div>
@@ -378,7 +277,5 @@
 <script src="dist/js/demo.js"></script>
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
 <script src="dist/js/pages/dashboard.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
 </body>
 </html>

@@ -112,6 +112,26 @@
     <!-- Main content -->
     <section class="content">
       <div class="container-fluid">
+        <?php 
+	if(isset($_GET['pesan'])){
+		if($_GET['pesan']=="sukses_hapus"){
+			echo "<div class='alert alert-success alert-dismissible fade show' role='alert'>
+  <strong>Hapus Akun Sukses !</strong>
+  <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button>
+</div>";
+		}
+	}
+	?>
+  <?php 
+	if(isset($_GET['pesan'])){
+		if($_GET['pesan']=="sukses"){
+			echo "<div class='alert alert-success alert-dismissible fade show' role='alert'>
+  <strong>Buat Akun Sukses !</strong>
+  <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button>
+</div></div>";
+		}
+	}
+	?>
         <!-- Small boxes (Stat box) -->
           <!-- ./col -->
           <!-- ./col -->
@@ -157,6 +177,51 @@
                             </script>
 
                         </table>
+                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                          Tambah Akun
+                        </button>
+
+                        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                          <div class="modal-dialog">
+                            <div class="modal-content">
+                              <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Tambah Akun</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                              </div>
+                              <div class="modal-body">
+                                <section class="content">
+                                  <div class="container-fluid">
+                                    <div class="row">
+                                      <form action="simpan_akun.php" method="POST" enctype="multipart/form-data">               
+                                              <div class="mb-3">
+                                                  <label class="form-label">Nama</label>
+                                                  <input type="text" name="nama" class="form-control">
+                                              </div>
+                                              <div class="mb-3">
+                                                  <label class="form-label">Username</label>
+                                                  <input type="text" name="username" class="form-control"></label>
+                                              </div>
+                                              <div class="mb-3">
+                                                  <label class="form-label">Password</label>
+                                                  <input type="text" name="password" class="form-control"></label>
+                                              </div>
+                                                <div class="mb-3">
+                                                  <label class="form-label">Level</label>
+                                                  <select class="form-select" aria-label="Default select example" name="level">
+                                                    <option selected>Plih Level</option>
+                                                    <option value="admin" name="level">Admin</option>
+                                                    <option value="user" name="level">User</option>
+                                                  </select>
+                                              </div>    
+                                              <button type="submit" name="simpan" value="simpan" class="btn btn-warning">Simpan</button>
+                                      </form>
+                                    </div>
+                                  </div>                                
+                                </section>
+                              </div>                                                       
+                            </div>
+                          </div>
+                        </div>
         </div>
         <!-- /.row -->
         <!-- Main row -->
@@ -186,6 +251,8 @@
 </script>
 <!-- Bootstrap 4 -->
 <script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
 <!-- ChartJS -->
 <script src="plugins/chart.js/Chart.min.js"></script>
 <!-- Sparkline -->

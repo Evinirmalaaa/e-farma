@@ -1,12 +1,12 @@
 <?php
     include './koneksi.php';
     
-    $id = $_GET['id'];
+    $id_produk = $_GET['id_produk'];
     
 
-    $sql = "DELETE FROM user WHERE id='$id'";
+    $sql = "DELETE FROM produk WHERE id_produk='$id_produk'";
     if($conn->query($sql) === TRUE){
-         header("location:akun.php?pesan=sukses_hapus");
+         header("location:admin.php?pesan=sukses");
     }else{
         echo "Eror: " . $sql . "<br>" . $conn->error;
     }
