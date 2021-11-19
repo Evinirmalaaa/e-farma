@@ -52,6 +52,8 @@
 
 	?>
 
+  
+
     <!-- Sidebar -->
     
     <div class="sidebar">
@@ -79,10 +81,10 @@
               </p>
             </a>
             <ul class="nav nav-treeview">
-            </ul>
+            </ul> 
           </li>
           <li class="nav-item">
-            <a href="akun_user.php" class="nav-link">
+            <a href="akun_user.php?username=<?php echo $_SESSION['username'];?>" class="nav-link">
               <i class="nav-icon fas fa-user-alt"></i>
               <p>Akun</p>
             </a>
@@ -103,9 +105,9 @@
  <div class="topnav">
   <a href="#home" class="active">E-Farma</a>
   <div id="myLinks">
-    <a href="#news">News</a>
-    <a href="#contact">Contact</a>
-    <a href="#about">About</a>
+    <a href="#">Dashboard</a>
+    <a href="akun_user.php?username=<?php echo $_SESSION['username'];?>">Akun</a>
+    <a href="#">Message</a>
   </div>
   <a href="javascript:void(0);" class="icon" onclick="myFunction()">
     <i class="fa fa-bars"></i>
@@ -119,6 +121,16 @@
       <div class="container-fluid">
         <div class="row mb-2">
         <img src="img/banner.png" width="100%">
+                <?php 
+	if(isset($_GET['pesan'])){
+		if($_GET['pesan']=="sukses_edit"){
+			echo "<div class='alert alert-success alert-dismissible fade show mt-5' role='alert'>
+  <strong>Edit Akun Sukses !</strong>
+  <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button>
+</div>";
+		}
+	}
+	?>
           
         </div><!-- /.row -->
       </div><!-- /.container-fluid -->
@@ -141,6 +153,7 @@
             $gambar_produk = $row["gambar_produk"];
             $harga_produk = $row["harga_produk"];
             $nama_produk = $row["nama_produk"];
+                 
         ?>
           <div class="col-sm-3 mb-3">
             <a href="detail_produk.php?id_produk=<?php echo $id_produk; ?>">

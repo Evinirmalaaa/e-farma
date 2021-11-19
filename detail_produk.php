@@ -24,7 +24,7 @@
       <div class="row row-sm">
          <div class="col-md-6 _boxzoom">
             <div class="_product-images">
-                <img class="img-fluid" src="./images/paramex.jpg" width="500" height="500">
+                <img class="img-fluid" src="./images/<?php echo $result['gambar_produk']?>" width="500" height="500">
             </div>
          </div>
          <div class="col-md-6">

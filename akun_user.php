@@ -19,6 +19,8 @@
   <link rel="stylesheet" href="plugins/jqvmap/jqvmap.min.css">
   <!-- Theme style -->
   <link rel="stylesheet" href="dist/css/adminlte.min.css">
+  <link rel="stylesheet" href="./style.css">
+  
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
   <!-- overlayScrollbars -->
   <link rel="stylesheet" href="plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
@@ -50,6 +52,19 @@
 	}
 
 	?>
+
+  <?php
+    include './koneksi.php';
+    
+    $username = $_GET['username'];
+
+    $sql = ("SELECT * FROM user WHERE username = '$username'");
+    $result = $conn->query($sql);
+
+    $result= $result->fetch_assoc();
+
+?>
+
 
     <!-- Sidebar -->
     <div class="sidebar">
@@ -94,11 +109,23 @@
     </div>
     <!-- /.sidebar -->
   </aside>
+  <div class="topnav">
+  <a href="#home" class="active">E-Farma</a>
+  <div id="myLinks">
+    <a href="./user.php">Dashboard</a>
+    <a href="#">Akun</a>
+    <a href="#">Message</a>
+  </div>
+  <a href="javascript:void(0);" class="icon" onclick="myFunction()">
+    <i class="fa fa-bars"></i>
+  </a>
+</div>
 
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper" style="background-color: #7BC2FF;">
     <!-- Content Header (Page header) -->
     <div class="content-header">
+      
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
@@ -112,116 +139,29 @@
     <!-- Main content -->
     <section class="content">
       <div class="container-fluid">
-        <?php 
-	if(isset($_GET['pesan'])){
-		if($_GET['pesan']=="sukses_hapus"){
-			echo "<div class='alert alert-success alert-dismissible fade show' role='alert'>
-  <strong>Hapus Akun Sukses !</strong>
-  <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button>
-</div>";
-		}
-	}
-	?>
-  <?php 
-	if(isset($_GET['pesan'])){
-		if($_GET['pesan']=="sukses"){
-			echo "<div class='alert alert-success alert-dismissible fade show' role='alert'>
-  <strong>Buat Akun Sukses !</strong>
-  <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button>
-</div></div>";
-		}
-	}
-	?>
+
+  
         <!-- Small boxes (Stat box) -->
           <!-- ./col -->
           <!-- ./col -->
-                        <table class="table table-bordered mt-4">
-                            <thead class="bg-blue">
-                                <tr>
-                                    <th>Id User</th>
-                                    <th>Nama</th>
-                                    <th>Username</th>
-                                    <th>Password</th>
-                                    <th>Level</th>
-                                    <th>Aksi</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                
-                            <?php
-                            
-
-                            
-                                include './koneksi.php';
-                                $employee = mysqli_query($conn,"select * from user");
-                                while($row = mysqli_fetch_array($employee))
-                                {
-                                    echo "<tr>
-                                     <td>".$row['id']."</td>
-                                     <td>".$row['nama']."</td>
-                                     <td>".$row['username']."</td>
-                                    <td>".$row['password']."</td>
-                                    <td>".$row['level']."</td>
-                                    <td> <a href='ubah_data.php?id= $row[id]' class='btn btn-warning btn-sm'>Ubah</a>&nbsp&nbsp&nbsp<a href='hapus.php?id=$row[id]' class='btn btn-warning btn-sm'>Hapus</a></td>
-
-                                </tr>";
-                                }
-                            ?>
-                            </tbody>
-                           
-
-                            <script>
-                            $(document).ready(function(){
-                                $('#tabel-data').DataTable();
-                            });
-                            </script>
-
-                        </table>
-                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                          Tambah Akun
-                        </button>
-
-                        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                          <div class="modal-dialog">
-                            <div class="modal-content">
-                              <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLabel">Tambah Akun</h5>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                              </div>
-                              <div class="modal-body">
-                                <section class="content">
-                                  <div class="container-fluid">
-                                    <div class="row">
-                                      <form action="simpan_akun.php" method="POST" enctype="multipart/form-data">               
-                                              <div class="mb-3">
-                                                  <label class="form-label">Nama</label>
-                                                  <input type="text" name="nama" class="form-control">
-                                              </div>
-                                              <div class="mb-3">
-                                                  <label class="form-label">Username</label>
-                                                  <input type="text" name="username" class="form-control"></label>
-                                              </div>
-                                              <div class="mb-3">
-                                                  <label class="form-label">Password</label>
-                                                  <input type="text" name="password" class="form-control"></label>
-                                              </div>
-                                                <div class="mb-3">
-                                                  <label class="form-label">Level</label>
-                                                  <select class="form-select" aria-label="Default select example" name="level">
-                                                    <option selected>Plih Level</option>
-                                                    <option value="admin" name="level">Admin</option>
-                                                    <option value="user" name="level">User</option>
-                                                  </select>
-                                              </div>    
-                                              <button type="submit" name="simpan" value="simpan" class="btn btn-warning">Simpan</button>
-                                      </form>
-                                    </div>
-                                  </div>                                
-                                </section>
-                              </div>                                                       
-                            </div>
-                          </div>
+                        <form action="user_ubah.php" method="POST"> 
+                    <input type="hidden" name="username" value="<?php echo $result['username']?>"> 
+                        <div class="mb-3">
+                            <label class="form-label">Nama</label>
+                            <input type="text" name="nama" class="form-control" value="<?php echo $result['nama']?>">
                         </div>
+                        <div class="mb-3">
+                            <label class="form-label">Username</label>
+                            <input type="   " name="username" class="form-control" value="<?php echo $result['username']?>"></label>
+                        </div>  
+                        <div class="mb-3">
+                            <label class="form-label">Password</label>
+                          
+                            <input type="password" id="myInput" name="password" class="form-control" value="<?php echo $result['password']?>"></label>
+                             <input type="checkbox" onclick="myFunction()">&nbsp Lihat Password
+                        </div>  
+                    <button name="simpan" value="stok" class="btn btn-warning">Simpan</button>
+                </form>
         </div>
         <!-- /.row -->
         <!-- Main row -->
@@ -249,6 +189,16 @@
 <script>
   $.widget.bridge('uibutton', $.ui.button)
 </script>
+  <script>
+        function myFunction() {
+        var x = document.getElementById("myInput");
+        if (x.type === "password") {
+            x.type = "text";
+            } else {
+                x.type = "password";
+            }
+        }
+    </script>
 <!-- Bootstrap 4 -->
 <script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
@@ -277,5 +227,15 @@
 <script src="dist/js/demo.js"></script>
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
 <script src="dist/js/pages/dashboard.js"></script>
+<script>
+function myFunction() {
+  var x = document.getElementById("myLinks");
+  if (x.style.display === "block") {
+    x.style.display = "none";
+  } else {
+    x.style.display = "block";
+  }
+}
+</script>
 </body>
 </html>
